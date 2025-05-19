@@ -7,23 +7,38 @@ interface FretboardProps {
   onFretClick: (data: NoteClick) => void;
 }
 
+const FRET_MARKERS = [3, 5, 7, 9, 12];
+
 const Fretboard: React.FC<FretboardProps> = ({ onFretClick }) => {
   return (
-    <div className="fretboard">
-      {[...Array(6)].map((_, stringIdx) => (
-        <div className="string" key={stringIdx}>
-          {[...Array(13)].map((_, fretIdx) => {
-            const note = getNoteAt(stringIdx, fretIdx);
-            return (
-              <button
-                className="fret"
-                key={fretIdx}
-                onClick={() => onFretClick({ stringIdx, fretIdx, note })}
-              ></button>
-            );
-          })}
-        </div>
-      ))}
+    <div className="fretboard-wrapper">
+      <div className="fretboard">
+        {[...Array(6)].map((_, stringIdx) => (
+          <div className="string" key={stringIdx}>
+            {[...Array(13)].map((_, fretIdx) => {
+              const note = getNoteAt(stringIdx, fretIdx);
+              return (
+                <button
+                  className="fret"
+                  key={fretIdx}
+                  onClick={() => onFretClick({ stringIdx, fretIdx, note })}
+                >
+                  {/* Notes are hidden */}
+                </button>
+              );
+            })}
+          </div>
+        ))}
+      </div>
+
+      {/* Fret marker row */}
+      <div className="fret-marker-row">
+        {[...Array(13)].map((_, fretIdx) => (
+          <div className="fret-marker" key={fretIdx}>
+            {FRET_MARKERS.includes(fretIdx) ? <div className="dot" /> : null}
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
