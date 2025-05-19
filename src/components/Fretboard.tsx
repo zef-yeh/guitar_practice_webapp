@@ -1,4 +1,3 @@
-// components/Fretboard.tsx
 import React from "react";
 import { getNoteAt } from "../utils/noteUtils";
 import type { NoteClick } from "../types/NoteClick";
@@ -20,9 +19,7 @@ const Fretboard: React.FC<FretboardProps> = ({ onFretClick }) => {
                 className="fret"
                 key={fretIdx}
                 onClick={() => onFretClick({ stringIdx, fretIdx, note })}
-              >
-                {note}
-              </button>
+              ></button>
             );
           })}
         </div>
